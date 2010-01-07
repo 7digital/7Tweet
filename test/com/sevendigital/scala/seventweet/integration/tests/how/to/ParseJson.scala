@@ -11,14 +11,16 @@ import org.hamcrest.core.IsEqual._
 class ParseJson {
 	@Test
 	def with_scala_inbuilt {
-		val json  	= JSON parseFull load(MUSIC_MONDAY_SEARCH_RESULT);
-		val result 	= json.get.asInstanceOf[Map[String, String]]
+		val jsonMap = parse(MUSIC_MONDAY_SEARCH_RESULT)
 
 		val expectedQuery 	= "%23musicmonday+OR+%23mm"
-		val actual 			= result get("query") get
+		val actual 			= jsonMap get("query") get
 
 		assertThat(actual, is(equalTo(expectedQuery)))
     }
+
+	private def parse(file : String) : Map[String, String] =
+		JSON.parseFull(load(file)).get.asInstanceOf[Map[String, String]]
 
 	private def load(file : String) = Source.fromFile(file).getLines.mkString
 
