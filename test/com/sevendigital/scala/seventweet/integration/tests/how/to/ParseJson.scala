@@ -16,8 +16,6 @@ class ParseJson {
 		val expectedQuery 	= "%23musicmonday+OR+%23mm"
 		val actual 			= jsonMap get("query") get
 
-		println(jsonMap)
-
 		assertThat(actual, is(equalTo(expectedQuery)))
     }
 
