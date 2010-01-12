@@ -4,6 +4,6 @@ import java.net.URI
 import org.apache.commons.httpclient.NameValuePair
 
 abstract class TheInternet {
-	def get(resource : URI) : Response
+	def get(resource : URI) : Response = get(resource, List())
 	def get(resource : URI, parameters : List[NameValuePair]) : Response
 }
