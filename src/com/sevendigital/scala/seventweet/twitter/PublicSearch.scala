@@ -8,6 +8,7 @@ import com.sevendigital.scala.seventweet.http.{QueryParameters, Response, TheInt
 
 class PublicSearch(val internet : TheInternet, val resource : URI) {
 	def search(query : String) : Seq[SearchResult] = search(query, 15)
+
 	def search(query : String, resultCount : Int) : Seq[SearchResult] = {
 		require (internet != null, "This class requires the internets!")
 		
