@@ -44,8 +44,17 @@ class SimpleInternet extends TheInternet {
 	}
 
 	private def setLogLevel {
-		System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
-		System.setProperty("org.apache.commons.logging.simplelog.showdatetime", "false");
-		System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient", "debug");
+		System.setProperty(
+			"org.apache.commons.logging.Log",
+			"org.apache.commons.logging.impl.SimpleLog"
+		);
+		System.setProperty(
+			"org.apache.commons.logging.simplelog.showdatetime",
+			"false"
+		);
+		System.setProperty(
+			"org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient",
+			"debug"
+		);
 	}
 }
