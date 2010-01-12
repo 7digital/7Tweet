@@ -8,12 +8,3 @@ abstract class TheInternet {
 	def get(resource : URI) : Response = get(resource, new QueryParameters())
 	def get(resource : URI, parameters : QueryParameters) : Response
 }
-
-class QueryParameters(nameValuePairs : List[NameValuePair]) {
-	def this() = this(List())
-	private lazy val parameters : ListBuffer[NameValuePair] = new ListBuffer[NameValuePair]()
-
-	nameValuePairs.foreach(parameters.append(_))
-
-	def toArray = parameters.toArray
-}
