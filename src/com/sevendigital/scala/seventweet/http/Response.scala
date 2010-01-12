@@ -1,7 +1,9 @@
 package com.sevendigital.scala.seventweet.http
 
-class Response(val status : Int, val text : String)
+import java.net.URI
+
+class Response(val status : Int, val uri : URI, val text : String)
 
 object Response {
-	def okay(text : String) = new Response(200, text)
+	def okay(text : String) = new Response(200, null, text)
 }
