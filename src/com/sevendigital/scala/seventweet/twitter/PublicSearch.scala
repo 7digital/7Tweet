@@ -3,8 +3,8 @@ package com.sevendigital.scala.seventweet.twitter
 import java.net.URI
 import util.parsing.json.JSON
 import org.apache.commons.httpclient.NameValuePair
-import com.sevendigital.scala.seventweet.http.{Response, TheInternet}
 import org.apache.http.HttpStatus
+import com.sevendigital.scala.seventweet.http.{QueryParameters, Response, TheInternet}
 
 class PublicSearch(val internet : TheInternet, val resource : URI) {
 	def search(query : String) : Seq[SearchResult] = search(query, 15)
@@ -24,7 +24,7 @@ class PublicSearch(val internet : TheInternet, val resource : URI) {
 	}
 
 	private def get(resource : URI, parameters : List[NameValuePair]) : Response = {
-		val result = internet.get(resource, parameters)
+		val result = internet.get(resource, new QueryParameters(parameters))
 
 		this ensure result
 
@@ -42,6 +42,11 @@ class PublicSearch(val internet : TheInternet, val resource : URI) {
 			"An unexpected status code was returned, expected <200> " +
 			"but was <" + response.status + ">. " +
 			"Message: " + response.text
+		)
+
+		require(
+			false == response.text.isEmpty,
+			"Did not expect no text to be returned."
 		)
 	}
 }

@@ -14,8 +14,7 @@ import org.apache.http.HttpStatus
 import org.apache.commons.httpclient.{NameValuePair, HttpMethodBase, HttpClient}
 
 class SimpleInternet extends TheInternet {
-
-	def get(resource : URI, parameters : List[NameValuePair]) =
+	def get(resource : URI, parameters : QueryParameters) =
 		execute(newGet(resource, parameters toArray))
 
 	private def newGet(uri : URI, parameters : Array[NameValuePair]) = {
@@ -28,17 +27,18 @@ class SimpleInternet extends TheInternet {
 		setLogLevel
 
 		val status = new HttpClient() executeMethod(method)
+		var responseUri = new URI(method.getURI.getEscapedURI)
 
 		if (status != HttpStatus.SC_OK)
 			return new Response(
 				status,
-				new java.net.URI(method.getURI.getEscapedURI),
-				method.getStatusText
+				responseUri,
+				method getStatusText
 			)
 
 		new Response(
 			status,
-			new java.net.URI(method.getURI.getEscapedURI),
+			responseUri,
 			method.getResponseBodyAsString
 		)
 	}
