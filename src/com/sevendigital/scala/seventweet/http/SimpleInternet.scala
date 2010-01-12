@@ -14,6 +14,7 @@ import org.apache.http.HttpStatus
 import org.apache.commons.httpclient.{NameValuePair, HttpMethodBase, HttpClient}
 
 class SimpleInternet extends TheInternet {
+	def get(resource : URI) = get(resource, List())
 	def get(resource : URI, parameters : List[NameValuePair]) = execute(newGet(resource, parameters toArray))
 
 	private def newGet(uri : URI, parameters : Array[NameValuePair]) = {
