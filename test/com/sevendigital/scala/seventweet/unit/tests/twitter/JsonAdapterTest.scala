@@ -41,6 +41,8 @@ class JsonAdapterTest extends UnitTestFixture {
 		val result = new JsonAdapter().toSearchResults(json);
 	}
 
+	// TEST: Dates are always parsed to GMT
+
 	private val MICHAEL_JORDAN_DEBUTS_FOR_CHICAGO_BULLS =
 		toDateAndTimeGmt(1984, Calendar.OCTOBER, 26, 20, 0, 00);
 }
