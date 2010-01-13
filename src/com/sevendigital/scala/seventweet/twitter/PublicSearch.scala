@@ -41,7 +41,8 @@ class PublicSearch(val internet : TheInternet, val resource : URI) {
 		if (response.status != HttpStatus.SC_OK)
 			throw new HttpException("An unexpected status code was returned, expected <200> " +
 			"but was <" + response.status + ">. " +
-			"Message: " + response.text)
+			"Message: " + response.text
+			)
 
 		require(
 			false == response.text.isEmpty,
