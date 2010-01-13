@@ -10,6 +10,7 @@ import org.mockito.Matchers._
 import java.net.URI
 import com.sevendigital.scala.seventweet.twitter.PublicSearch
 import com.sevendigital.scala.seventweet.http.{QueryParameters, Response, TheInternet}
+import org.apache.commons.httpclient.HttpException
 
 class PublicSearchTests {
     @Test
@@ -23,6 +24,21 @@ class PublicSearchTests {
 			any(classOf[QueryParameters])
 		)
     }
+
+	@Test { val expected = classOf[HttpException]}
+	def if_twitter_is_unavailable_returns_empty_list {
+		mockInternet = mock(classOf[TheInternet])
+		when(
+			mockInternet.get(
+				any(classOf[URI]),
+				any(classOf[QueryParameters])
+			)
+		).
+		thenReturn(new Response(503, null, null));
+
+		new PublicSearch(mockInternet, SEARCH_TWITTER).search("")
+	}
+
 	
 	private def given_any_uri_returns(result : String) {
 		mockInternet = mock(classOf[TheInternet])
@@ -33,7 +49,9 @@ class PublicSearchTests {
 			)
 		).
 		thenReturn(Response.okay(result));
+
 	}
+
 
 	var mockInternet : TheInternet = null
 	val SEARCH_TWITTER = new URI("http://search.twitter.com/search.json")
