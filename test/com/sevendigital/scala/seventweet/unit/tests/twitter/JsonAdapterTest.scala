@@ -22,13 +22,13 @@ class JsonAdapterTest extends UnitTestFixture {
 	@Test
 	def toSearchResults_returns_the_correct_dates {
 		val theResults = List(List(
-			("created_at", "Thu, 07 Jan 2010 14:01:55 +0000"),
+			("created_at", "Fri, 26 Oct 1984 20:00:00 +0000"),
 			("text", "")
 		))
 
 		val someJsonWithOneResult = Map("results" -> theResults)
 
-		val expectedDate = toDateAndTime(2010, Calendar.JANUARY, 7, 14, 1, 55);
+		val expectedDate = MICHAEL_JORDAN_DEBUTS_FOR_CHICAGO_BULLS
 		
 		val result = new JsonAdapter().toSearchResults(someJsonWithOneResult);
 
@@ -40,4 +40,7 @@ class JsonAdapterTest extends UnitTestFixture {
 		val someJsonWithNoResults = Map("CHUBBY" -> "BAT OR RAIN")
 		val result = new JsonAdapter().toSearchResults(json);
 	}
+
+	private val MICHAEL_JORDAN_DEBUTS_FOR_CHICAGO_BULLS =
+		toDateAndTimeGmt(1984, Calendar.OCTOBER, 26, 20, 0, 00);
 }

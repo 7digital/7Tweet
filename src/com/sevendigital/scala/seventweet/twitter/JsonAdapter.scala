@@ -44,5 +44,5 @@ class JsonAdapter {
 
 	private def parseDate(dateText : String) = dateFormat parse(dateText, new ParsePosition(0))
 
-	private lazy val dateFormat = new SimpleDateFormat("EEE, DD MMM yyyy HH:mm:ss ZZZZ")
+	private lazy val dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZZ")
 }
