@@ -41,8 +41,25 @@ class JsonAdapterTest extends UnitTestFixture {
 		val result = new JsonAdapter().toSearchResults(json);
 	}
 
-	// TEST: Dates are always parsed to GMT
+	@Test
+	def created_date_is_parsed_accounting_for_timezone {
+		val theResults = List(List(
+			("created_at", "Tue, 20 Nov 1990 19:30:00 +0100"),
+			("text", "")
+		))
+
+		val someJsonWithOneResult = Map("results" -> theResults)
+
+		val expectedDate = THATCHER_FAILS_TO_WIN_PARTY_MANDATE
+
+		val result = new JsonAdapter().toSearchResults(someJsonWithOneResult);
+
+		assertThat(result.first.created, is(equalTo(expectedDate)))
+	}
 
 	private val MICHAEL_JORDAN_DEBUTS_FOR_CHICAGO_BULLS =
 		toDateAndTimeGmt(1984, Calendar.OCTOBER, 26, 20, 0, 00);
+
+	private val THATCHER_FAILS_TO_WIN_PARTY_MANDATE =
+		toDateAndTimeGmt(1990, Calendar.NOVEMBER, 20, 18, 30, 00);
 }
